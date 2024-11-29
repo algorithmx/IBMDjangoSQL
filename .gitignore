@@ -1,7 +1,10 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+djangoenv/
 *.py[cod]
 *$py.class
+onlinecourse/migrations/
+*/migrations/
 
 # C extensions
 *.so
