@@ -1,0 +1,28 @@
+{
+  "courses": [
+    {
+      "name": "Learning Django",
+      "description": "Django is an extremely popular and fully featured server-side web framework, written in Python",
+      "pub_date": "Today",
+      "total_enrollment": 0,
+      "instructors": ["admin"],
+      "lessons": [
+        {
+          "title": "What is Django",
+          "order": 0,
+          "content": "Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. Built by experienced developers, it takes care of much of the hassle of web development, so you can focus on writing your app without needing to reinvent the wheel. It೯urce."
+        }
+      ],
+      "questions": [
+        {
+          "content": "Is Django a Python framework",
+          "grade": 100,
+          "choices": [
+            {"content": "Yes", "is_correct": true},
+            {"content": "No", "is_correct": false}
+          ]
+        }
+      ]
+    }
+  ]
+}

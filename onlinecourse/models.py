@@ -35,6 +35,14 @@ class Course(models.Model):
     total_enrollment = models.IntegerField(default=0)
     is_enrolled = False
 
+    def set_image_path(self, path):
+        """
+        Set the image path directly without uploading through admin.
+        """
+        # Here we're assuming that the path is valid and the file exists
+        self.image = path
+        self.save()
+
     def __str__(self):
         return "Name: " + self.name + "," + \
                "Description: " + self.description

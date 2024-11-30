@@ -1,0 +1,33 @@
+{
+  "courses": [
+    {
+      "name": "Course 1 from JSON FILE",
+      "description": "Course Description",
+      "pub_date": "2023-01-01",
+      "total_enrollment": 10,
+      "lessons": [
+        {
+          "title": "Introduction to the Course",
+          "order": 0,
+          "content": "Welcome to the course! Here's what you'll learn..."
+        },
+        {
+          "title": "Basic Concepts",
+          "order": 1,
+          "content": "This lesson covers the fundamental concepts..."
+        }
+      ],
+      "questions": [
+        {
+          "content": "What is the capital of France?",
+          "grade": 100,
+          "choices": [
+            {"content": "Berlin", "is_correct": false},
+            {"content": "Paris", "is_correct": true},
+            {"content": "Madrid", "is_correct": false}
+          ]
+        }
+      ]
+    }
+  ]
+}
