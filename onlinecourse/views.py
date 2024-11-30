@@ -135,28 +135,20 @@ def unenroll(request, course_id):
         return HttpResponse(f"Unauthenticated user")
 
 
-#TODO check
 # submit view to create an exam submission record for a course enrollment
 def submit_exam(request, course_id):
-    # Get user and course object
     course = get_object_or_404(Course, pk=course_id)
     user = request.user
-    # get the associated enrollment object created when the user enrolled the course
     enrollment = Enrollment.objects.get(user=user, course=course)
     if enrollment is None:
-        # return error message
         return HttpResponse(f"You ({user.username}) are not enrolled in this course {course.id}")
     else:
-        # Create a submission object referring to the enrollment
         submission = Submission.objects.create(enrollment=enrollment)
         if submission is None:
             return HttpResponse(f"Failed to create submission for enrollment {enrollment.id}")
         else:
-            # Collect the selected choices from exam form
             selected_choices = extract_answers(request)
-            # Add each selected choice object to the submission object
             submission.choices.set(selected_choices)
-            # Redirect to show_exam_result with the submission id
             submission.save()
             return HttpResponseRedirect(reverse(viewname='onlinecourse:exam_result', args=(course.id, submission.id)))
 
@@ -178,25 +170,16 @@ def show_exam_result(request, course_id, submission_id):
     course = get_object_or_404(Course, pk=course_id)
     submission = Submission.objects.get(id=submission_id)
     choices = submission.choices.all()
-
     total_score = 0
-    questions = course.question_set.all()  # Assuming course has related questions
-
+    questions = course.question_set.all()
     for question in questions:
-        correct_choices = question.choice_set.filter(is_correct=True)  # Get all correct choices for the question
-        selected_choices = choices.filter(question=question)  # Get the user's selected choices for the question
-
-        # Check if the selected choices are the same as the correct choices
+        correct_choices = question.choice_set.filter(is_correct=True)
+        selected_choices = choices.filter(question=question)
         if set(correct_choices) == set(selected_choices):
-            total_score += question.grade  # Add the question's grade only if all correct answers are selected
-
+            total_score += question.grade
     return render(
         request, 
         'onlinecourse/exam_result_bootstrap.html',
-        {
-            'course': course,
-            'grade': total_score,
-            'choices': choices
-        }
+        {'course': course, 'grade': total_score, 'choices': choices}
     )
     
